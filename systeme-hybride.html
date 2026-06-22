@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Système combiné Voicebot + Application mobile d’urgence</title>
+  <style>
+    :root{
+      --bg:#08111f; --panel:#0f1c30; --panel2:#14243c; --text:#eef5ff; --muted:#a8b7cc;
+      --red:#ff304f; --green:#29d391; --blue:#4db5ff; --amber:#ffbd4a; --line:#29405f;
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(135deg,#050910,#0d1e36 55%,#172b45);color:var(--text);}
+    .deck{max-width:1200px;margin:0 auto;padding:40px 22px 80px}
+    .hero{border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:46px;background:radial-gradient(circle at 85% 10%,rgba(255,48,79,.24),transparent 28%),linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:0 30px 80px rgba(0,0,0,.28);}
+    h1{font-size:54px;line-height:1.02;margin:0 0 18px;letter-spacing:-1.8px}.subtitle{font-size:21px;color:var(--muted);max-width:850px;line-height:1.5}.badge{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border-radius:999px;background:rgba(255,48,79,.14);border:1px solid rgba(255,48,79,.35);color:#ffdce2;font-weight:700;margin-bottom:22px}.grid{display:grid;gap:22px}.cols-2{grid-template-columns:1fr 1fr}.cols-3{grid-template-columns:repeat(3,1fr)}
+    .section{margin-top:32px;padding:32px;border:1px solid rgba(255,255,255,.1);border-radius:26px;background:rgba(15,28,48,.82);backdrop-filter:blur(8px)}
+    h2{font-size:32px;margin:0 0 20px;letter-spacing:-.6px}h3{font-size:21px;margin:0 0 12px}.card{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.11);border-radius:20px;padding:22px;min-height:120px}.card p,.section p,li{color:var(--muted);line-height:1.55}.kpi{font-size:38px;font-weight:900}.red{color:var(--red)}.green{color:var(--green)}.blue{color:var(--blue)}.amber{color:var(--amber)}
+    .architecture{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;gap:12px;align-items:center}.node{border-radius:22px;padding:22px;background:#101f35;border:1px solid var(--line);text-align:center}.arrow{font-size:34px;text-align:center;color:var(--blue)}
+    .phone-wrap{display:flex;justify-content:center}.phone{width:295px;height:610px;background:#05070c;border:10px solid #1d2635;border-radius:42px;padding:18px;box-shadow:0 35px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}.screen{height:100%;border-radius:30px;background:linear-gradient(180deg,#12213a,#08111f);padding:20px;position:relative;overflow:hidden}.status{display:flex;justify-content:space-between;color:#dbe8f8;font-size:12px;margin-bottom:18px}.app-title{font-weight:800;font-size:19px;margin-bottom:6px}.coords{background:rgba(77,181,255,.12);border:1px solid rgba(77,181,255,.3);padding:13px;border-radius:16px;color:#cdeeff;font-size:13px;margin:16px 0}.redbtn{width:176px;height:176px;margin:36px auto 22px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#ff8394,#ff304f 52%,#9b001a);display:flex;align-items:center;justify-content:center;text-align:center;font-size:24px;font-weight:900;box-shadow:0 0 0 12px rgba(255,48,79,.12),0 0 42px rgba(255,48,79,.65);border:2px solid rgba(255,255,255,.18)}.pill{border-radius:999px;padding:10px 12px;margin:8px 0;background:rgba(255,255,255,.07);font-size:13px;color:#dceaff;display:flex;justify-content:space-between}.mini{font-size:12px;color:var(--muted)}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{position:relative;padding:20px;border:1px solid var(--line);border-radius:18px;background:#0d1a2d}.num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#06111e;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:10px}.voice{border-left:4px solid var(--blue)}.app{border-left:4px solid var(--red)}.security{border-left:4px solid var(--green)}.legal{border-left:4px solid var(--amber)}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px}th,td{padding:15px;border-bottom:1px solid var(--line);vertical-align:top}th{text-align:left;color:#dceaff;background:rgba(255,255,255,.06)}td{color:var(--muted)}.note{padding:18px;border-radius:18px;background:rgba(255,189,74,.12);border:1px solid rgba(255,189,74,.28);color:#ffe4b3}.footer{margin-top:24px;color:#8ea1ba;font-size:12px;line-height:1.5}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:rgba(255,255,255,.08);margin:4px 4px 0 0;font-size:12px;color:#d9e8fb}
+    @media(max-width:900px){h1{font-size:38px}.cols-2,.cols-3,.flow,.architecture{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.hero{padding:30px}.section{padding:24px}.phone{transform:scale(.92)}}
+    @media print{body{background:#fff;color:#111}.section,.hero,.card,.node,.step{break-inside:avoid;background:#fff;color:#111;border-color:#ccc;box-shadow:none}.card p,.section p,li,td,.footer,.mini{color:#333}.phone{box-shadow:none}.deck{max-width:none}.badge{color:#111}}
+  </style>
+</head>
+<body>
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(8,17,31,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span style="font-weight:900;letter-spacing:-.3px;margin-right:8px">🛡️ Voicebot de crise</span>
+      <a href="index.html" style="text-decoration:none;color:#cdeeff;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);padding:8px 13px;border-radius:999px;font-size:13px;font-weight:800">Démonstrateur 10 cas</a>
+      <a href="systeme-hybride.html" style="text-decoration:none;color:#06111e;border:1px solid #4db5ff;background:#4db5ff;padding:8px 13px;border-radius:999px;font-size:13px;font-weight:800">Système hybride App + Voicebot</a>
+    </div>
+  </nav>
+  <main class="deck">
+    <section class="hero">
+      <div class="badge">Système d’urgence hybride · Voicebot + App mobile</div>
+      <h1>Plateforme d’alerte sécurisée avec localisation GPS, canal vocal et mode dégradé</h1>
+      <p class="subtitle">Une architecture combinée pour situations critiques : l’application mobile collecte les données fiables et le voicebot maintient le contact opérationnel en inbound et outbound, même lorsque la data mobile devient instable.</p>
+    </section>
+
+    <section class="section">
+      <h2>Vue d’ensemble</h2>
+      <div class="architecture">
+        <div class="node"><h3>Application mobile</h3><p>Bouton rouge, GPS, identité appareil, mode offline, SMS fallback.</p></div>
+        <div class="arrow">→</div>
+        <div class="node"><h3>Backend sécurisé</h3><p>API chiffrée, file d’alertes, règles de priorité, journalisation, centre opérationnel.</p></div>
+        <div class="arrow">↔</div>
+        <div class="node"><h3>Voicebot téléphonique</h3><p>Réception d’appels, appels sortants, qualification, confirmation et guidage vocal.</p></div>
+      </div>
+    </section>
+
+    <section class="section grid cols-2">
+      <div>
+        <h2>Mockup de l’application mobile</h2>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="screen">
+              <div class="status"><span>09:41</span><span>LTE · GPS</span></div>
+              <div class="app-title">Alerte Opérationnelle</div>
+              <div class="mini">Utilisateur authentifié · Terminal vérifié</div>
+              <div class="coords">Position prête<br><strong>Lat 50.8503 · Lon 4.3517</strong><br>Précision estimée : 8 m</div>
+              <div class="redbtn">BOUTON<br>ROUGE</div>
+              <div class="pill"><span>Canal principal</span><strong>Data chiffrée</strong></div>
+              <div class="pill"><span>Fallback</span><strong>SMS / appel</strong></div>
+              <div class="pill"><span>Statut</span><strong class="green">Prêt</strong></div>
+              <p class="mini">Maintenir 3 secondes pour déclencher. Les données critiques sont transmises automatiquement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>Fonctionnement app mobile</h2>
+        <div class="card app"><h3>1. Déclenchement</h3><p>L’utilisateur appuie sur le bouton rouge. L’app vérifie l’identité, l’intégrité du terminal et la disponibilité réseau.</p></div><br>
+        <div class="card app"><h3>2. Collecte minimale</h3><p>GPS, horodatage, identifiant mission/utilisateur, niveau d’urgence, batterie, réseau, message texte ou vocal si disponible.</p></div><br>
+        <div class="card app"><h3>3. Envoi résilient</h3><p>Priorité data chiffrée. Si échec : stockage local chiffré, retry automatique, SMS codé, appel voicebot ou canal radio/satellite selon matériel.</p></div><br>
+        <div class="card app"><h3>4. Confirmation</h3><p>L’app affiche “reçu”, “en attente”, “envoyé par fallback” ou “connexion perdue”. Le voicebot peut rappeler l’utilisateur.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Voicebot : inbound et outbound</h2>
+      <div class="grid cols-2">
+        <div class="card voice"><h3>Inbound — l’utilisateur appelle le bot</h3><p>Le bot répond immédiatement, annonce la nature automatisée de façon courte, identifie le contexte, demande ou confirme l’urgence, récupère les informations vocales essentielles et peut envoyer un lien/app push pour partager la position.</p><span class="tag">Qualification</span><span class="tag">Priorisation</span><span class="tag">Transcription</span></div>
+        <div class="card voice"><h3>Outbound — le bot appelle l’utilisateur</h3><p>Le bot rappelle après déclenchement app, perte de data, absence de confirmation, escalade centre opérationnel ou besoin d’informations complémentaires. Il confirme réception, guide l’utilisateur et collecte les détails manquants.</p><span class="tag">Rappel automatique</span><span class="tag">Guidage</span><span class="tag">Escalade humaine</span></div>
+      </div>
+      <div class="flow" style="margin-top:18px">
+        <div class="step"><div class="num">1</div><h3>Alerte reçue</h3><p>App, SMS, appel ou bouton rouge.</p></div>
+        <div class="step"><div class="num">2</div><h3>Priorité calculée</h3><p>Gravité, position, identité, contexte mission.</p></div>
+        <div class="step"><div class="num">3</div><h3>Voicebot agit</h3><p>Dialogue court, collecte, confirmation, consignes.</p></div>
+        <div class="step"><div class="num">4</div><h3>Centre informé</h3><p>Dashboard, carte, logs, enregistrement, escalade.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Caractéristiques de sécurité</h2>
+      <div class="grid cols-3">
+        <div class="card security"><h3>Identité & accès</h3><p>MFA, certificats appareil, rôles, unités, missions, révocation immédiate, MDM/MAM, contrôle jailbreak/root.</p></div>
+        <div class="card security"><h3>Chiffrement</h3><p>TLS 1.3, chiffrement local, clés en Secure Enclave/Keystore, rotation de clés, chiffrement au repos serveur.</p></div>
+        <div class="card security"><h3>Anti-usurpation</h3><p>Liens à usage unique, signature des payloads, horodatage, nonce, device attestation, détection d’anomalies.</p></div>
+        <div class="card security"><h3>Résilience</h3><p>Queue offline chiffrée, retry, SMS fallback, multi-opérateurs, mode faible bande passante, canaux radio/satellite possibles.</p></div>
+        <div class="card security"><h3>Souveraineté</h3><p>Hébergement souverain ou cloud défense approuvé, data residency stricte, segmentation par pays et par mission.</p></div>
+        <div class="card security"><h3>Audit</h3><p>Logs immuables, traçabilité accès, supervision SOC, alertes sécurité, conservation limitée et purge automatisée.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Conformité : points d’attention UE / Belgique</h2>
+      <table>
+        <tr><th>Sujet</th><th>Obligation / principe</th><th>Design recommandé</th></tr>
+        <tr><td>Annonce que c’est un bot</td><td>L’AI Act prévoit des obligations de transparence pour les systèmes IA qui interagissent directement avec des personnes.</td><td>Message ultra-court au début : “Assistant vocal automatisé d’urgence. Appel enregistré. Donnez votre position ou dites urgence.”</td></tr>
+        <tr><td>Temps compté</td><td>La transparence ne doit pas bloquer l’assistance vitale. En urgence, l’information peut être concise, puis complétée après stabilisation.</td><td>Préavis vocal de 2–4 secondes + notice complète dans l’app, SMS/lien, politique interne et logs.</td></tr>
+        <tr><td>Enregistrement automatique</td><td>La voix, le numéro, la localisation et les transcriptions sont des données personnelles. Le traitement doit avoir une base légale et être proportionné.</td><td>Base légale à documenter : intérêt vital, mission d’intérêt public/autorité publique, obligation légale ou régime défense/police selon le cas.</td></tr>
+        <tr><td>GPS & données sensibles</td><td>La localisation précise est très sensible opérationnellement et personnellement.</td><td>Collecte minimale, accès strictement limité, conservation courte, chiffrement, séparation par pays/unité, consultation journalisée.</td></tr>
+        <tr><td>Décision automatisée</td><td>Éviter qu’une décision critique sans supervision humaine prive quelqu’un d’assistance.</td><td>Le bot priorise et assiste, mais escalade vers opérateur humain selon seuils : danger vital, incohérence, mineur, blessure, menace armée.</td></tr>
+        <tr><td>Biométrie</td><td>Reconnaissance vocale/identification biométrique et identification à distance peuvent déclencher des régimes stricts.</td><td>Limiter à l’authentification nécessaire, éviter identification biométrique massive, faire DPIA/FRAIA et validation juridique avant déploiement.</td></tr>
+      </table>
+      <div class="note" style="margin-top:18px"><strong>Formule opérationnelle conseillée :</strong> ne pas demander un consentement long en pleine urgence. Informer brièvement, enregistrer/traiter ce qui est nécessaire pour sauver/protéger, documenter la base légale, puis fournir l’information complète après l’événement.</div>
+    </section>
+
+    <section class="section">
+      <h2>Message vocal recommandé au démarrage</h2>
+      <div class="card legal">
+        <h3>Version urgence — 3 secondes</h3>
+        <p style="font-size:20px;color:#fff">“Assistant vocal automatisé d’urgence. Appel enregistré. Dites votre urgence ou partagez votre position.”</p>
+      </div>
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card legal"><h3>Version app mobile</h3><p>“En appuyant sur le bouton rouge, vos données d’urgence — position, identité opérationnelle, heure, audio éventuel — sont transmises au centre autorisé.”</p></div>
+        <div class="card legal"><h3>Après stabilisation</h3><p>Envoyer une notice complète : finalités, données traitées, base légale, durée de conservation, destinataires, droits applicables, contact DPO ou autorité compétente.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Checklist de déploiement</h2>
+      <div class="grid cols-3">
+        <div class="card"><div class="kpi red">01</div><h3>DPIA / analyse d’impact</h3><p>Cartographier risques vie privée, sécurité opérationnelle, faux positifs et erreurs d’acheminement.</p></div>
+        <div class="card"><div class="kpi amber">02</div><h3>Cadre légal</h3><p>Valider le statut : défense, police, secours, sous-traitance, pays concernés, transferts hors UE.</p></div>
+        <div class="card"><div class="kpi green">03</div><h3>Tests terrain</h3><p>Tester bunker, forêt, roaming, absence data, SIM étrangère, brouillage GPS, batterie faible.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Sources réglementaires utilisées</h2>
+      <p>Cette présentation n’est pas un avis juridique. Elle sert de base produit/architecture à faire valider par un juriste défense, DPO et RSSI.</p>
+      <ul>
+        <li>AI Act : obligation de transparence pour les systèmes IA qui interagissent avec des personnes ; les systèmes à haut risque incluent notamment biométrie, infrastructures critiques, services essentiels, law enforcement, migration et justice.</li>
+        <li>GDPR / Belgique : traitement de données personnelles soumis aux principes de licéité, minimisation, proportionnalité, transparence, sécurité et accountability.</li>
+        <li>Urgence vitale : le traitement peut être fondé sur la protection des intérêts vitaux lorsqu’il est nécessaire et qu’il n’y a pas le temps ou la possibilité d’obtenir un consentement valable.</li>
+      </ul>
+      <div class="footer">
+        Références consultées : Commission européenne — AI Act / AI regulatory framework ; EU AI Act Art. 5, Art. 50 et Annexe III ; Autorité belge / Data Protection Act 30 July 2018 ; DLA Piper Belgium Data Protection ; ICT Legal Guide Belgium ; ICO Vital Interests guidance.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
