@@ -34,6 +34,10 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);ba
 .navlinks a:hover{color:var(--navy)}
 .navlinks a.active{color:var(--blue);border-bottom-color:var(--blue)}
 @media(max-width:880px){.navlinks{gap:16px}.brand small{display:none}}
+.hdrCta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:800;font-size:13.5px;padding:11px 17px;border-radius:12px;box-shadow:0 8px 20px rgba(3,105,161,.30);transition:.18s;white-space:nowrap}
+.hdrCta:hover{background:#075985;transform:translateY(-1px);box-shadow:0 10px 24px rgba(3,105,161,.38)}
+.hdrCta .ico{color:#fff}
+@media(max-width:880px){.hdrCta{padding:10px 13px;font-size:12.5px}.hdrCta .lbl-full{display:none}}
 
 /* compliance banner */
 .compli{display:flex;align-items:center;gap:10px;background:#fef2f2;color:#b91c1c;font-weight:700;font-size:13px;border-radius:14px;padding:11px 16px;margin:18px 0 6px}
@@ -146,6 +150,10 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:26px 0;color:var
       <a href="systeme-hybride.html">Système hybride</a>
       <a href="seveso-voicebot.html" class="active">Seveso Voice</a>
     </nav>
+    <a class="hdrCta" href="https://aivansoul.github.io/seveso-voice/demo/" target="_blank" rel="noopener">
+      <svg class="ico ico-sm" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+      <span class="lbl-full">Démo vocale&nbsp;</span>Seveso
+    </a>
   </div>
 </header>
 
