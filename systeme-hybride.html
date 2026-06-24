@@ -7,33 +7,45 @@
   <style>
     :root{
       --bg:#f7f9fc; --panel:#ffffff; --panel2:#f1f5fb; --text:#121826; --navy:#071a3a; --muted:#64748b;
-      --red:#ef3340; --green:#11a36a; --blue:#1457d9; --amber:#ff9f1c; --line:#e6ebf2;
+      --red:#dc2626; --green:#047857; --blue:#0369a1; --amber:#b45309; --line:#e6ebf2;
       --white:#ffffff; --shadow:0 18px 50px rgba(7,26,58,.12);
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#fff,var(--bg));color:var(--text);}
     .deck{max-width:1200px;margin:0 auto;padding:40px 22px 80px}
-    .hero{border:1px solid var(--line);border-radius:30px;padding:46px;background:radial-gradient(circle at 85% 10%,rgba(239,51,64,.08),transparent 30%),var(--panel);box-shadow:var(--shadow);}
-    h1{font-size:54px;line-height:1.02;margin:0 0 18px;letter-spacing:-1.8px;color:var(--navy)}.subtitle{font-size:21px;color:var(--muted);max-width:850px;line-height:1.5}.badge{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border-radius:999px;background:#fff2f3;border:1px solid #f1c5c9;color:var(--red);font-weight:700;margin-bottom:22px}.grid{display:grid;gap:22px}.cols-2{grid-template-columns:1fr 1fr}.cols-3{grid-template-columns:repeat(3,1fr)}
-    .section{margin-top:32px;padding:32px;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:var(--shadow)}
-    h2{font-size:32px;margin:0 0 20px;letter-spacing:-.6px;color:var(--navy)}h3{font-size:21px;margin:0 0 12px;color:var(--navy)}.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;min-height:120px;box-shadow:0 6px 18px rgba(7,26,58,.05)}.card p,.section p,li{color:var(--muted);line-height:1.55}.kpi{font-size:38px;font-weight:900}.red{color:var(--red)}.green{color:var(--green)}.blue{color:var(--blue)}.amber{color:var(--amber)}
-    .architecture{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;gap:12px;align-items:center}.node{border-radius:22px;padding:22px;background:#f8fafc;border:1px solid var(--line);text-align:center}.arrow{font-size:34px;text-align:center;color:var(--blue)}
-    .phone-wrap{display:flex;justify-content:center}.phone{width:295px;height:610px;background:#fff;border:10px solid #14161a;border-radius:42px;padding:18px;box-shadow:0 20px 38px rgba(0,0,0,.18)}.screen{height:100%;border-radius:30px;background:linear-gradient(180deg,#ffffff,#f4f8ff);padding:20px;position:relative;overflow:hidden;border:1px solid var(--line)}.status{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:18px}.app-title{font-weight:800;font-size:19px;margin-bottom:6px;color:var(--navy)}.coords{background:#eef4ff;border:1px solid #cfe0ff;padding:13px;border-radius:16px;color:#13407e;font-size:13px;margin:16px 0}.redbtn{width:176px;height:176px;margin:36px auto 22px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#ff8394,#ef3340 52%,#9b001a);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-size:24px;font-weight:900;box-shadow:0 0 0 12px #fff2f3,0 0 42px rgba(239,51,64,.35);border:2px solid rgba(255,255,255,.6)}.pill{border-radius:999px;padding:10px 12px;margin:8px 0;background:#f1f5f9;font-size:13px;color:#334155;display:flex;justify-content:space-between}.mini{font-size:12px;color:var(--muted)}
-    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{position:relative;padding:20px;border:1px solid var(--line);border-radius:18px;background:#f8fafc}.num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:10px}.voice{border-left:4px solid var(--blue)}.app{border-left:4px solid var(--red)}.security{border-left:4px solid var(--green)}.legal{border-left:4px solid var(--amber)}
-    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px}th,td{padding:15px;border-bottom:1px solid var(--line);vertical-align:top}th{text-align:left;color:var(--navy);background:#f1f5fb}td{color:var(--muted)}.note{padding:18px;border-radius:18px;background:#fff8ec;border:1px solid #ffe1b0;color:#7a4e00}.footer{margin-top:24px;color:#8ea1ba;font-size:12px;line-height:1.5}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#eef4ff;color:var(--blue);margin:4px 4px 0 0;font-size:12px}
+    .hero{border:0;border-radius:28px;padding:46px;background:linear-gradient(135deg,#eaf2ff,#f6fbff);box-shadow:0 1px 2px rgba(2,6,23,.04),0 22px 50px rgba(2,6,23,.06);}
+    h1{font-size:54px;line-height:1.02;margin:0 0 18px;letter-spacing:-1.8px;color:var(--navy)}.subtitle{font-size:21px;color:var(--muted);max-width:850px;line-height:1.5}.badge{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border-radius:999px;background:#fef2f2;border:0;color:var(--red);font-weight:700;margin-bottom:22px}.grid{display:grid;gap:22px}.cols-2{grid-template-columns:1fr 1fr}.cols-3{grid-template-columns:repeat(3,1fr)}
+    .section{margin-top:32px;padding:32px;border:0;border-radius:24px;background:var(--panel);box-shadow:0 1px 2px rgba(2,6,23,.04),0 16px 40px rgba(2,6,23,.05)}
+    h2{font-size:32px;margin:0 0 20px;letter-spacing:-.6px;color:var(--navy)}h3{font-size:21px;margin:0 0 12px;color:var(--navy)}.card{background:#f1f5f9;border:0;border-radius:18px;padding:22px;min-height:120px;box-shadow:none}.card p,.section p,li{color:var(--muted);line-height:1.55}.kpi{font-size:38px;font-weight:900}.red{color:var(--red)}.green{color:var(--green)}.blue{color:var(--blue)}.amber{color:var(--amber)}
+    .architecture{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;gap:12px;align-items:center}.node{border-radius:18px;padding:22px;background:#eef6ff;border:0;text-align:center}.arrow{font-size:34px;text-align:center;color:var(--blue)}
+    .phone-wrap{display:flex;justify-content:center}.phone{width:295px;height:610px;background:#fff;border:10px solid #14161a;border-radius:42px;padding:18px;box-shadow:0 20px 38px rgba(0,0,0,.18)}.screen{height:100%;border-radius:30px;background:linear-gradient(180deg,#ffffff,#f4f8ff);padding:20px;position:relative;overflow:hidden;border:0}.status{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:18px}.app-title{font-weight:800;font-size:19px;margin-bottom:6px;color:var(--navy)}.coords{background:#eef4ff;border:0;padding:13px;border-radius:16px;color:#13407e;font-size:13px;margin:16px 0}.redbtn{width:176px;height:176px;margin:36px auto 22px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#ff8394,#ef3340 52%,#9b001a);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;font-size:24px;font-weight:900;box-shadow:0 0 0 12px #fff2f3,0 0 42px rgba(239,51,64,.35);border:2px solid rgba(255,255,255,.6)}.pill{border-radius:999px;padding:10px 12px;margin:8px 0;background:#f1f5f9;font-size:13px;color:#334155;display:flex;justify-content:space-between}.mini{font-size:12px;color:var(--muted)}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{position:relative;padding:20px;border:0;border-radius:16px;background:#f1f5f9}.num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:10px}.voice{background:#eef6ff}.app{background:#fef2f2}.security{background:#ecfdf5}.legal{background:#fffbeb}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:16px}th,td{padding:15px;border-bottom:1px solid var(--line);vertical-align:top}th{text-align:left;color:var(--navy);background:#f1f5fb}td{color:var(--muted)}.note{padding:18px;border-radius:16px;background:#fffbeb;border:0;color:#7a4e00}.footer{margin-top:24px;color:#8ea1ba;font-size:12px;line-height:1.5}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#eef4ff;color:var(--blue);margin:4px 4px 0 0;font-size:12px}
     @media(max-width:900px){h1{font-size:38px}.cols-2,.cols-3,.flow,.architecture{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.hero{padding:30px}.section{padding:24px}.phone{transform:scale(.92)}}
     @media print{body{background:#fff;color:#111}.section,.hero,.card,.node,.step{break-inside:avoid;background:#fff;color:#111;border-color:#ccc;box-shadow:none}.card p,.section p,li,td,.footer,.mini{color:#333}.phone{box-shadow:none}.deck{max-width:none}.badge{color:#111}}
+    .site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .siteIn{max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+    .brand img{height:30px;width:auto;display:block}
+    .brand span{font-weight:800;color:var(--navy);font-size:15px;letter-spacing:-.2px;white-space:nowrap}
+    .menu{display:flex;gap:4px;flex-wrap:wrap}
+    .menu a{color:var(--muted);font-weight:600;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:10px;transition:.18s}
+    .menu a:hover{background:#f1f5f9;color:var(--navy)}
+    .menu a.active{color:var(--blue);background:#eef6ff}
+    @media(max-width:680px){.brand span{display:none}.menu a{padding:8px 10px;font-size:13px}}
   </style>
 </head>
 <body>
-  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid #e6ebf2">
-    <div style="max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <span style="font-weight:900;letter-spacing:-.3px;margin-right:8px;color:#071a3a">🛡️ Voicebot de crise</span>
-      <a href="index.html" style="text-decoration:none;color:#1457d9;border:1px solid #e6ebf2;background:#eef4ff;padding:8px 13px;border-radius:999px;font-size:13px;font-weight:800">Démonstrateur 10 cas</a>
-      <a href="systeme-hybride.html" style="text-decoration:none;color:#fff;border:1px solid #1457d9;background:#1457d9;padding:8px 13px;border-radius:999px;font-size:13px;font-weight:800">Système hybride App + Voicebot</a>
-      <a href="cas-essentiels.html" style="text-decoration:none;color:#1457d9;border:1px solid #e6ebf2;background:#eef4ff;padding:8px 13px;border-radius:999px;font-size:13px;font-weight:800">3 cas essentiels</a>
+  <header class="site">
+    <div class="siteIn">
+      <a class="brand" href="index.html"><img src="banana-navy-logo.svg" alt="Banana Navy"/><span>Voicebot de crise</span></a>
+      <nav class="menu">
+        <a href="index.html">Démonstrateur 10 cas</a>
+        <a href="cas-essentiels.html">3 cas essentiels</a>
+        <a href="systeme-hybride.html" class="active">Système hybride</a>
+      </nav>
     </div>
-  </nav>
+  </header>
   <main class="deck">
     <section class="hero">
       <div class="badge">Système d’urgence hybride · Voicebot + App mobile</div>
