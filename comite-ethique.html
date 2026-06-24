@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Comité d’éthique — KPIs, mésusage & RGPD · Voicebot de crise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;--surface:#f8fafc;--surface2:#f1f5f9;--navy:#0f172a;--ink:#020617;
+  --muted:#475569;--soft:#64748b;--line:#e2e8f0;--blue:#0369a1;--blue2:#0ea5e9;
+  --danger:#dc2626;--amber:#b45309;--ok:#047857;--violet:#7c3aed;--radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:var(--blue);text-decoration:none}
+svg{display:block}
+.ico{width:24px;height:24px;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ico-sm{width:18px;height:18px}.ico-xs{width:15px;height:15px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.siteIn{max-width:1120px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand img{height:46px;width:auto;display:block}
+.brand small{font-weight:900;color:var(--navy);font-size:15px;letter-spacing:-.2px;white-space:nowrap}
+.navlinks{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.navlinks a{color:var(--soft);font-weight:800;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;padding:6px 0;border-bottom:2px solid transparent;transition:.18s}
+.navlinks a:hover{color:var(--navy)}
+.navlinks a.active{color:var(--blue);border-bottom-color:var(--blue)}
+@media(max-width:980px){.navlinks{gap:14px}.brand small{display:none}}
+
+.hero{padding:54px 0 16px}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:#eff6ff;padding:7px 13px;border-radius:999px}
+h1{font-size:clamp(32px,5.5vw,54px);line-height:1.03;letter-spacing:-.035em;margin:18px 0 16px;color:var(--navy)}
+.lead{font-size:18px;color:var(--muted);max-width:780px}
+
+section{padding:26px 0}
+.sectionHead{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sectionHead .badgeIco{width:40px;height:40px;border-radius:12px;background:#eff6ff;display:grid;place-items:center;color:var(--blue)}
+h2{font-size:clamp(23px,3.3vw,32px);letter-spacing:-.03em;margin:0;color:var(--navy)}
+.sub{color:var(--muted);max-width:840px;margin:10px 0 0}
+h3{font-size:17px;margin:0;color:var(--navy);letter-spacing:-.01em}
+
+/* KPI groups */
+.kpiGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.kgrp{border-radius:20px;padding:20px 22px}
+.kgrp.blue{background:#eff6ff}.kgrp.red{background:#fef2f2}.kgrp.amber{background:#fffbeb}.kgrp.green{background:#ecfdf5}
+.kgrp .gh{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.kgrp .gh i{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center}
+.kgrp.blue .gh i{color:#0369a1}.kgrp.red .gh i{color:#dc2626}.kgrp.amber .gh i{color:#b45309}.kgrp.green .gh i{color:#047857}
+.kgrp ul{list-style:none;margin:10px 0 0;padding:0}
+.kgrp li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(15,23,42,.07)}
+.kgrp li:last-child{border-bottom:0}
+.kgrp li .nm{color:var(--navy);font-weight:600;font-size:14px}
+.kgrp li .tg{color:var(--soft);font-weight:700;font-size:12.5px;white-space:nowrap;text-align:right}
+
+/* misuse cards */
+.mcards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.mcard{border-radius:20px;background:var(--surface);padding:22px}
+.mcard.span{grid-column:1 / -1;background:#fff7ed}
+.mcard .mh{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+.mcard .mh i{width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center;color:var(--danger);flex:none}
+.mcard p.d{margin:0 0 10px;color:var(--muted);font-size:14px}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:12px 0 6px}
+.tick{list-style:none;margin:0;padding:0}
+.tick li{position:relative;padding:6px 0 6px 26px;color:var(--muted);font-size:13.8px}
+.tick li .ico{position:absolute;left:0;top:7px;color:var(--ok)}
+.vec{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.vec li{position:relative;padding:6px 0 6px 24px;color:var(--muted);font-size:13.6px}
+.vec li .ico{position:absolute;left:0;top:7px;color:#c2410c}
+.vec li b{color:var(--navy)}
+
+/* security strip */
+.secGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.sec{display:flex;gap:12px;border-radius:16px;background:var(--surface);padding:16px}
+.sec i{width:38px;height:38px;border-radius:11px;background:#eff6ff;display:grid;place-items:center;color:var(--blue);flex:none}
+.sec b{display:block;color:var(--navy);font-size:14px;margin-bottom:2px}
+.sec span{color:var(--muted);font-size:13px}
+
+/* table */
+.tbl{margin-top:16px;border-radius:18px;overflow:hidden;background:var(--surface)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px 16px;text-align:left;vertical-align:top;font-size:13.8px}
+th{background:#eef2f7;color:var(--navy);font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+td{color:var(--muted);border-top:1px solid var(--line)}
+td b{color:var(--navy)}
+td.s{color:var(--navy);font-weight:700}
+
+/* transparence */
+.tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.tcard{border-radius:18px;background:#eff6ff;padding:18px 20px}
+.tcard .th{display:flex;align-items:center;gap:9px;color:var(--navy);font-weight:800;font-size:14px;margin-bottom:6px}
+.tcard .th i{color:var(--blue)}
+.tcard p{margin:0;color:var(--muted);font-size:13.8px}
+.quote{margin-top:14px;border-radius:16px;background:#0f172a;color:#e2e8f0;padding:18px 22px;font-size:15px}
+.quote b{color:#fff}
+
+.callout{margin-top:18px;border-radius:18px;background:#fffbeb;padding:18px 22px;color:#7c2d12;font-size:14px}
+.linkChips{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.linkChips a{display:inline-flex;align-items:center;gap:7px;background:#eff6ff;color:var(--navy);font-weight:700;font-size:13px;padding:9px 13px;border-radius:999px;transition:.18s}
+.linkChips a:hover{color:var(--blue);background:#dbeafe}
+.linkChips a .ico{color:var(--blue)}
+
+footer{border-top:1px solid var(--line);margin-top:30px;padding:26px 0;color:var(--soft);font-size:13px}
+.foot{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.foot img{height:24px;width:auto}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+@media(max-width:880px){.kpiGrid,.mcards,.secGrid,.tcards,.vec{grid-template-columns:1fr}.mcard.span{grid-column:auto}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="siteIn">
+    <a class="brand" href="index.html"><img src="banana-navy-logo.svg" alt="Banana Navy"/><small>Voicebot de crise</small></a>
+    <nav class="navlinks">
+      <a href="index.html">Démonstrateur 10 cas</a>
+      <a href="cas-essentiels.html">3 cas essentiels</a>
+      <a href="systeme-hybride.html">Système hybride</a>
+      <a href="seveso-voicebot.html">Seveso Voice</a>
+      <a href="comite-ethique.html" class="active">Comité d’éthique</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <section class="hero reveal">
+    <span class="kicker"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="M9 12h6M12 9v6"/></svg>Comité d’éthique · Ethical Advisory Board</span>
+    <h1>KPIs, cas de mésusage, sécurité, RGPD &amp; transparence</h1>
+    <p class="lead">Cadre de pilotage éthique du voicebot de crise. On commence par les <b>indicateurs (KPIs)</b> à suivre, puis les <b>cas de mésusage et points de sécurité</b> (détection de deepfake, attaques, bruits spéciaux de déstabilisation), la <b>conformité RGPD</b> des données vocales et métadonnées, et la <b>transparence</b> envers les utilisateurs finaux.</p>
+  </section>
+
+  <!-- 1. KPIs -->
+  <section class="reveal">
+    <div class="sectionHead"><div class="badgeIco"><svg class="ico" viewBox="0 0 24 24"><path d="M12 14a4 4 0 1 0-4-4"/><path d="m12 10 4-3"/><path d="M5 19a9 9 0 1 1 14 0"/></svg></div><h2>1 · KPIs à suivre</h2></div>
+    <p class="sub">Indicateurs clés à mesurer en continu pour ce type de voicebot d’urgence — performance, sécurité, éthique et confiance.</p>
+    <div class="kpiGrid" id="kpis"></div>
+  </section>
+
+  <!-- 2. Misuse & security -->
+  <section class="reveal">
+    <div class="sectionHead"><div class="badgeIco" style="background:#fef2f2;color:#dc2626"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div><h2>2 · Cas de mésusage &amp; sécurité</h2></div>
+    <p class="sub">Comment le bot peut être trompé ou attaqué — et les mitigations. Principe directeur&nbsp;: <b>aucune décision critique n’est 100&nbsp;% automatisée</b>, l’humain reste dans la boucle.</p>
+    <div class="mcards" id="misuse"></div>
+  </section>
+
+  <!-- 3. Security points synthesis -->
+  <section class="reveal">
+    <div class="sectionHead"><div class="badgeIco"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h2>Points de sécurité — contrôles</h2></div>
+    <div class="secGrid" id="security"></div>
+  </section>
+
+  <!-- 4. RGPD -->
+  <section class="reveal">
+    <div class="sectionHead"><div class="badgeIco"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3 8.5 7 10 4-1.5 7-5 7-10V6z"/><path d="M12 8v4"/><circle cx="12" cy="15.5" r=".6" fill="currentColor" stroke="none"/></svg></div><h2>3 · RGPD — voix, numéro &amp; métadonnées</h2></div>
+    <p class="sub">Le <b>numéro de téléphone</b>, la <b>voix</b>, la <b>localisation</b> et les <b>métadonnées</b> sont des données personnelles. Sans base légale, minimisation, sécurité et durée de conservation maîtrisées, le traitement expose à des <b>infractions au RGPD</b>. L’empreinte vocale relève en plus des données biométriques (catégorie particulière).</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Donnée</th><th>Risque / nature</th><th>Design recommandé</th></tr></thead>
+        <tbody id="rgpd"></tbody>
+      </table>
+    </div>
+    <div class="callout"><b>Avant déploiement&nbsp;:</b> documenter la base légale (intérêt vital, mission d’intérêt public ou obligation légale), réaliser une <b>AIPD/DPIA</b>, limiter les transferts hors UE (hébergement souverain), et tenir un registre des traitements. Validation par DPO + juriste indispensable.</div>
+    <div class="linkChips">
+      <a href="https://www.autoriteprotectiondonnees.be/citoyen" target="_blank" rel="noopener"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>Autorité de protection des données (BE)</a>
+      <a href="https://artificialintelligenceact.eu/fr/" target="_blank" rel="noopener"><svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>AI Act (UE)</a>
+    </div>
+  </section>
+
+  <!-- 5. Transparence -->
+  <section class="reveal">
+    <div class="sectionHead"><div class="badgeIco"><svg class="ico" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12"/><circle cx="12" cy="12" r="3"/></svg></div><h2>4 · Transparence envers les utilisateurs</h2></div>
+    <p class="sub">Annoncer dès le début qu’il s’agit d’un assistant IA doit rester un <b>point d’attention permanent</b> (obligation de transparence de l’AI Act, art. 50). En urgence, l’information est ultra-courte, puis complétée après stabilisation.</p>
+    <div class="tcards" id="transp"></div>
+    <div class="quote">Message d’ouverture recommandé&nbsp;: <b>«&nbsp;Assistant vocal automatisé d’urgence. Appel enregistré. Dites votre urgence ou partagez votre position.&nbsp;»</b> — court, honnête, sans jamais laisser croire à un interlocuteur humain, avec possibilité de demander un opérateur.</div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <img src="banana-navy-logo.svg" alt="Banana Navy"/>
+    <span>Comité d’éthique — cette page sert de cadre produit à faire valider par DPO, RSSI et juriste. Le voicebot ne remplace jamais le 112.</span>
+  </div>
+</footer>
+
+<script>
+const I={
+ perf:'<path d="M12 14a4 4 0 1 0-4-4"/><path d="m12 10 4-3"/><path d="M5 19a9 9 0 1 1 14 0"/>',
+ shieldX:'<path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/><path d="m9.5 9.5 5 5M14.5 9.5l-5 5"/>',
+ scale:'<path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7 2 13a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/><path d="M8 21h8"/>',
+ heart:'<path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 4.7-7 9-7 9z"/>',
+ social:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 6a3 3 0 0 1 0 6"/><path d="M18 14a6 6 0 0 1 3 5"/>',
+ bot:'<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 8V4"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M9 17h6"/>',
+ face:'<circle cx="12" cy="12" r="9"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><path d="M9 10h.01M15 10h.01"/>',
+ hoax:'<path d="M10.3 3.3 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.3a2 2 0 0 0-3.4 0"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+ flood:'<path d="M3 12h2l2-7 3 14 3-10 2 5h6"/>',
+ wave:'<path d="M2 12h2l1.5-5 2 10 2-7 1.5 4H22"/>',
+ lock:'<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+ human:'<circle cx="12" cy="7" r="3"/><path d="M5 21a7 7 0 0 1 14 0"/><path d="m18 8 1.5 1.5L23 6" />',
+ net:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+ inject:'<path d="M14 4 20 10"/><path d="m6 20 8-8 2 2-8 8H6z"/><path d="m14 4-2 2 4 4 2-2z"/>',
+ eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12"/><circle cx="12" cy="12" r="3"/>',
+ mic:'<rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M12 17v4"/>',
+ doc:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
+ check:'<path d="M20 6 9 17l-5-5"/>',
+ dot:'<circle cx="12" cy="12" r="8"/>'
+};
+function svg(n,c){return '<svg class="ico '+(c||'ico-sm')+'" viewBox="0 0 24 24">'+I[n]+'</svg>'}
+
+/* ---- KPIs ---- */
+const KPI=[
+ ['blue','perf','Performance & qualité de service',[
+   ['Taux de localisation exploitable','% appels géolocalisés'],
+   ['Temps avant transfert humain','danger vital ≤ 15 s'],
+   ['Compréhension vocale (ASR/NLU)','% intentions correctes'],
+   ['Latence de réponse & disponibilité','uptime ≥ 99,9 %'],
+   ['Taux de transfert réussi','vers 112 / opérateur'],
+   ['Taux d’abandon d’appel','à minimiser']
+ ]],
+ ['red','shieldX','Sécurité & fiabilité',[
+   ['Faux positifs / faux négatifs','détection d’urgence'],
+   ['Détection voix synthétique / deepfake','% spoofing détecté'],
+   ['Canulars / faux signalements détectés','% bloqués'],
+   ['Appels automatisés / spam filtrés','% rejetés'],
+   ['Robustesse au bruit','% réussite en milieu bruyant']
+ ]],
+ ['amber','scale','Éthique & conformité',[
+   ['Annonce « assistant IA »','100 % visé'],
+   ['Consentement géolocalisation','% recueilli'],
+   ['Respect du délai de purge','conformité durée'],
+   ['Escalade humaine — cas sensibles','mineur, danger vital'],
+   ['Équité linguistique & accessibilité','FR / NL / DE / EN'],
+   ['Biais détectés & corrigés','suivi périodique']
+ ]],
+ ['green','heart','Confiance & expérience',[
+   ['Satisfaction usager (CSAT)','enquête post-appel'],
+   ['Taux de reprise humaine','sur demande'],
+   ['Plaintes / réclamations','à minimiser'],
+   ['Doublons regroupés','% dédoublonné']
+ ]]
+];
+document.getElementById('kpis').innerHTML=KPI.map(g=>
+ '<div class="kgrp '+g[0]+'"><div class="gh"><i>'+svg(g[1])+'</i><h3>'+g[2]+'</h3></div>'+
+ '<ul>'+g[3].map(k=>'<li><span class="nm">'+k[0]+'</span><span class="tg">'+k[1]+'</span></li>').join('')+'</ul></div>').join('');
+
+/* ---- Misuse ---- */
+const MIS=[
+ ['social','Tromper le bot (ingénierie sociale)','Fausses déclarations, usurpation d’identité, manipulation pour obtenir une action ou détourner les secours.',
+  ['Recoupement des informations et scoring de crédibilité','Aucune décision critique 100 % automatisée','Escalade humaine au moindre doute','Vérification multi-canal (rappel, BE-Alert)']],
+ ['bot','Détection de bot & appels automatisés','L’appelant cherche à savoir si c’est un bot pour le contourner ; ou des robocalls saturent le service.',
+  ['Transparence assumée : on annonce que c’est un assistant IA','Challenge-response léger anti-automatisation','Limitation de débit (rate limiting) & réputation des numéros','Détection de patterns d’appels automatisés']],
+ ['face','Deepfake & voix synthétique (anti-spoofing)','Voix clonée pour se faire passer pour une autorité, un proche ou une victime ; injection de voix TTS.',
+  ['Détection anti-spoofing : artefacts, liveness, anti-rejeu','Analyse de cohérence (débit, prosodie, canal)','Vérification multi-canal pour toute action sensible','Ne jamais agir sur la seule voix → escalade humaine']],
+ ['hoax','Faux signalements & swatting','Déclencher une intervention à tort, mobiliser inutilement police et secours.',
+  ['Corrélation avec d’autres signaux et l’historique','Numéro vérifié + horodatage traçable','Scoring de risque avant mobilisation lourde','Validation humaine pour les engagements critiques']],
+ ['net','Saturation (DoS / flooding)','Inonder la ligne d’appels pour rendre le service indisponible au moment critique.',
+  ['File d’attente priorisée (cas vitaux d’abord)','Rate limiting & détection d’anomalies de trafic','Bascule de capacité et dégradation maîtrisée','Surveillance temps réel (SOC)']]
+];
+document.getElementById('misuse').innerHTML=MIS.map(m=>
+ '<div class="mcard"><div class="mh"><i>'+svg(m[0])+'</i><h3>'+m[1]+'</h3></div>'+
+ '<p class="d">'+m[2]+'</p><div class="lbl">Mitigations</div>'+
+ '<ul class="tick">'+m[3].map(x=>'<li>'+svg('check','ico-xs')+x+'</li>').join('')+'</ul></div>').join('')
++ /* audio attacks — full-width card */
+ '<div class="mcard span"><div class="mh"><i style="color:#c2410c">'+svg('wave')+'</i><h3>Attaques audio & bruits spéciaux (déstabilisation du bot)</h3></div>'+
+ '<p class="d">Signaux conçus pour dégrader ou tromper le moteur vocal et fausser la compréhension.</p>'+
+ '<div class="lbl">Vecteurs / bruits spéciaux</div>'+
+ '<ul class="vec">'+[
+   ['Bruit de fond saturant','foule, sirènes, machines → dégrade l’ASR'],
+   ['Exemples adversariaux audio','perturbations quasi-inaudibles qui trompent le modèle'],
+   ['Commandes cachées / ultrasons','type « DolphinAttack », masquage psychoacoustique'],
+   ['Tonalités DTMF & sons purs','pour perturber la détection'],
+   ['Injection de voix synthétique','TTS superposé au signal'],
+   ['Injection de consignes vocales','« ignore tes instructions » (prompt injection)'],
+   ['Boucles & répétitions','pour épuiser le contexte / la session']
+ ].map(v=>'<li>'+svg('dot','ico-xs')+'<b>'+v[0]+'</b> — '+v[1]+'</li>').join('')+'</ul>'+
+ '<div class="lbl">Mitigations</div>'+
+ '<ul class="tick">'+[
+   'Débruitage, filtrage et détection d’anomalies audio',
+   'La bande passante téléphonique (≈300–3400 Hz) bloque nativement les ultrasons',
+   'Validation sémantique des intentions avant toute action',
+   'Refus d’exécuter une action sensible sur la seule commande vocale',
+   'Plafonds de durée / de tours de parole, journaux et rejeu pour analyse',
+   'Escalade humaine dès qu’un signal est incohérent'
+ ].map(x=>'<li>'+svg('check','ico-xs')+x+'</li>').join('')+'</ul></div>';
+
+/* ---- Security points ---- */
+const SEC=[
+ ['lock','Chiffrement','TLS en transit, chiffrement au repos, clés en enclave sécurisée, rotation.'],
+ ['human','Human-in-the-loop','Escalade vers opérateur sur seuils : danger vital, mineur, incohérence, menace.'],
+ ['face','Anti-spoofing','Détection deepfake/voix synthétique, liveness, anti-rejeu.'],
+ ['net','Anti-saturation','Rate limiting, file priorisée, détection d’anomalies de trafic.'],
+ ['inject','Défense prompt-injection','Cloisonnement des consignes système, validation des intentions, refus d’actions hors périmètre.'],
+ ['doc','Audit & traçabilité','Logs immuables, supervision SOC, conservation limitée et purge automatisée.']
+];
+document.getElementById('security').innerHTML=SEC.map(s=>
+ '<div class="sec"><i>'+svg(s[0])+'</i><div><b>'+s[1]+'</b><span>'+s[2]+'</span></div></div>').join('');
+
+/* ---- RGPD table ---- */
+const RGPD=[
+ ['Numéro de téléphone','Identifiant direct de la personne.','Minimisation, accès restreint, pseudonymisation, durée de conservation courte.'],
+ ['Voix & enregistrement','Donnée personnelle ; l’empreinte vocale est biométrique (catégorie particulière).','Éviter l’identification biométrique, base légale documentée, information, AIPD/DPIA.'],
+ ['Localisation (GPS)','Donnée très sensible opérationnellement et personnellement.','Consentement / lien dédié, minimisation, chiffrement, purge rapide, accès journalisé.'],
+ ['Métadonnées','Heure, durée, langue, statut réseau, numéro appelé — recoupables et ré-identifiantes.','Minimisation, agrégation, séparation par service, accès tracé.'],
+ ['Transcriptions','Données personnelles, parfois sensibles (santé).','Conservation limitée, accès strict, masquage des données non nécessaires.'],
+ ['Transferts hors UE','Risque de non-conformité.','Hébergement souverain/UE, encadrement contractuel, data residency.']
+];
+document.getElementById('rgpd').innerHTML=RGPD.map(r=>
+ '<tr><td class="s">'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>').join('');
+
+/* ---- Transparence ---- */
+const TR=[
+ ['mic','Annonce immédiate','Message ultra-court au décroché indiquant l’assistant IA et l’enregistrement.'],
+ ['human','Toujours un humain possible','L’usager peut à tout moment demander un opérateur ; jamais d’illusion d’humain.'],
+ ['doc','Information complète après','Finalités, base légale, durée, destinataires, droits, contact DPO — via SMS/lien/app après stabilisation.'],
+ ['scale','Conformité AI Act','Obligation de transparence des systèmes IA interagissant avec des personnes (art. 50).'],
+ ['eye','Cohérence multilingue','Même annonce et mêmes droits en FR / NL / DE / EN.'],
+ ['check','Journalisation','Preuve horodatée que l’information a bien été délivrée.']
+];
+document.getElementById('transp').innerHTML=TR.map(t=>
+ '<div class="tcard"><div class="th"><i>'+svg(t[0])+'</i>'+t[1]+'</div><p>'+t[2]+'</p></div>').join('');
+
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
