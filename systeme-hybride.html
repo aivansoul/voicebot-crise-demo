@@ -25,14 +25,15 @@
     @media print{body{background:#fff;color:#111}.section,.hero,.card,.node,.step{break-inside:avoid;background:#fff;color:#111;border-color:#ccc;box-shadow:none}.card p,.section p,li,td,.footer,.mini{color:#333}.phone{box-shadow:none}.deck{max-width:none}.badge{color:#111}}
     .site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
     .siteIn{max-width:1200px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:18px}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
-    .brand img{height:46px;width:auto;display:block}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+    .brand img{height:44px;width:auto;display:block}
     .brand span{font-weight:900;color:var(--navy);font-size:15px;letter-spacing:-.2px;white-space:nowrap}
-    .menu{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
-    .menu a{color:var(--muted);font-weight:800;font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:.18s}
+    .menu{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:20px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.menu::-webkit-scrollbar{display:none}
+    .menu a{flex:none;white-space:nowrap;color:var(--muted);font-weight:800;font-size:12px;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;transition:.18s}
     .menu a:hover{color:var(--navy)}
     .menu a.active{color:var(--blue);border-bottom-color:var(--blue)}
-    @media(max-width:680px){.brand span{display:none}.menu{gap:16px}.menu a{font-size:12px}}
+    @media(max-width:680px){.brand span{display:none}.menu{gap:16px;justify-content:flex-start}.menu a{font-size:12px}}
+      @media(max-width:760px){.menu{justify-content:flex-start}}
   </style>
 </head>
 <body>
